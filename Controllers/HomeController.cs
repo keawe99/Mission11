@@ -22,7 +22,8 @@ namespace Mission11.Controllers
             {
                 Books = _repo.Books
                     .OrderBy(x => x.Title)
-                    .Take((pageNum - 1) * pageSize), //figure out this take issue. it is displaying all 14 movies and not separating them on separate pages
+                    .Skip((pageNum - 1) * pageSize)
+                    .Take(pageSize),
 
                 PaginationInfo = new PaginationInfo
                 {
@@ -31,11 +32,8 @@ namespace Mission11.Controllers
                     TotalItems = _repo.Books.Count()
                 }
             };
-          
 
-      
             return View(blah);
         }
-
     }
 }
